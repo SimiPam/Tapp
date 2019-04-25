@@ -34,7 +34,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     //holder to access the widget in the custom messages layout
     public class MessageViewHolder extends RecyclerView.ViewHolder
     {
-        TextView senderMessageText, receiverMessageText;
+        TextView senderMessageText, receiverMessageText, senderEmotion, receiverEmotion;
         CircleImageView receiverProfileImage;
 
         public MessageViewHolder(@NonNull View itemView)
@@ -44,6 +44,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             senderMessageText = (TextView) itemView.findViewById(R.id.sender_message_text);
             receiverMessageText = (TextView) itemView.findViewById(R.id.receiver_message_text);
             receiverProfileImage = (CircleImageView) itemView.findViewById(R.id.message_profile_image);
+            senderEmotion = (TextView) itemView.findViewById(R.id.sender_emotion);
+            receiverEmotion = (TextView) itemView.findViewById(R.id.receiver_emotion);
         }
     }
 
@@ -91,6 +93,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             messageViewHolder.receiverMessageText.setVisibility(View.INVISIBLE);
             messageViewHolder.receiverProfileImage.setVisibility(View.INVISIBLE);
             messageViewHolder.senderMessageText.setVisibility(View.INVISIBLE);
+            messageViewHolder.senderEmotion.setVisibility(View.INVISIBLE);
+            messageViewHolder.receiverEmotion.setVisibility(View.INVISIBLE);
 
 
             //if its the sender
@@ -100,6 +104,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 messageViewHolder.senderMessageText.setBackgroundResource(R.drawable.sender_messages_layout);
                 messageViewHolder.senderMessageText.setTextColor(Color.BLACK);
                 messageViewHolder.senderMessageText.setText(messages.getMessage());
+
+                if (messages.getEmotion()!=null)
+                {
+                    messageViewHolder.senderEmotion.setVisibility(View.VISIBLE);
+                    messageViewHolder.senderEmotion.setTextColor(Color.RED);
+                    messageViewHolder.senderEmotion.setText(messages.getEmotion());
+                }
             }
             else
             {
@@ -109,6 +120,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 messageViewHolder.receiverMessageText.setBackgroundResource(R.drawable.receiver_messages_layout);
                 messageViewHolder.receiverMessageText.setText(messages.getMessage());
                 messageViewHolder.receiverMessageText.setTextColor(Color.BLACK);
+
+                if (messages.getEmotion()!=null)
+                {
+                    messageViewHolder.receiverEmotion.setVisibility(View.VISIBLE);
+                    messageViewHolder.receiverEmotion.setTextColor(Color.RED);
+                    messageViewHolder.receiverEmotion.setText(messages.getEmotion());
+                }
             }
         }
     }

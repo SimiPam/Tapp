@@ -5,17 +5,25 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.pam.tapp"
-        minSdkVersion 19
+        minSdkVersion 22
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
     }
 }
 
@@ -28,13 +36,31 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.google.firebase:firebase-auth:16.0.1'
-    implementation 'com.google.firebase:firebase-database:16.0.1'
-    implementation 'com.google.firebase:firebase-storage:16.0.1'
-    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-auth:16.2.1'
+    implementation 'com.google.firebase:firebase-database:16.1.0'
+    implementation 'com.google.firebase:firebase-storage:16.1.0'
+    implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-ml-vision:19.0.3'
+    implementation 'com.google.firebase:firebase-ml-vision-face-model:17.0.2'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.7.+'
     implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.firebaseui:firebase-ui-database:4.1.0'
-    implementation 'com.google.firebase:firebase-messaging:17.0.0'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
+//    implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
+//    implementation 'com.amazonaws:aws-android-sdk-cognito:2.7.+'
+    implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
+   // implementation 'com.amazonaws:aws-android-sdk-rekognition:2.12.+'
+//    implementation 'com.amazonaws:aws-android-sdk-comprehend:2.6.22'
+    implementation 'com.google.api-client:google-api-client-android:1.22.0'
+    implementation 'com.google.apis:google-api-services-vision:v1-rev357-1.22.0'
+    implementation 'com.google.code.findbugs:jsr305:2.0.1'
+    implementation 'commons-io:commons-io:2.5'
+    implementation 'com.google.http-client:google-http-client-gson:1.23.0' exclude module: 'httpclient'
+    implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'com.microsoft.projectoxford:face:1.4.3'
 }

@@ -9,18 +9,34 @@
         android:layout_height="45dp"
         android:src="@drawable/profile_image"
         android:layout_marginTop="10dp"/>
+
     <TextView
         android:id="@+id/receiver_message_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:layout_alignParentTop="true"
+        android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/message_profile_image"
         android:background="@drawable/receiver_messages_layout"
-        android:text="receivers mesages here"
         android:padding="10dp"
+        android:text="receivers mesages here"
         android:textSize="14sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/receiver_emotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/receiver_message_text"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginTop="58dp"
+        android:layout_toEndOf="@+id/message_profile_image"
+        android:background="@drawable/receiver_messages_layout"
+        android:padding="10dp"
+        android:text="receivers emotions here"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/sender_message_text"
@@ -31,6 +47,20 @@
         android:layout_alignParentEnd="true"
         android:background="@drawable/sender_messages_layout"
         android:text="senders mesages here"
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/sender_emotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="@+id/receiver_message_text"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/sender_message_text"
+        android:background="@drawable/sender_messages_layout"
+        android:text="senders emotion here"
         android:padding="10dp"
         android:textSize="14sp"
         android:textStyle="bold"/>

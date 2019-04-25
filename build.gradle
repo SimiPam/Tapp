@@ -14,7 +14,6 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
 allprojects {
     repositories {
         google()
@@ -25,3 +24,6 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+ext { googlePlayServicesVersion = "15.0.1" }
