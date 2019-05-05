@@ -191,25 +191,30 @@ public class ProfileActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
+                            //save user detail to contacts
                             ContactsRef.child(receiverSenderID).child(senderUserID)
                                     .child("Contacts").setValue("Saved")
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()){
+                                                //remove the sender chat request from sender
                                                 ChatRequestRef.child(senderUserID).child(receiverSenderID)
                                                         .removeValue()
                                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if (task.isSuccessful()){
+                                                                    //remove request from the sender side
                                                                     ChatRequestRef.child(receiverSenderID).child(senderUserID)
                                                                             .removeValue()
                                                                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                                 @Override
                                                                                 public void onComplete(@NonNull Task<Void> task) {
+                                                                                    //enable button
                                                                                     SendMessageRequestButton.setEnabled(true);
                                                                                     current_stat = "friends";
+                                                                                    //change button to remove contact
                                                                                     SendMessageRequestButton.setText("Remove Contact");
                                                                                     DeclineRequestButton.setVisibility(View.INVISIBLE);
                                                                                     DeclineRequestButton.setEnabled(false);

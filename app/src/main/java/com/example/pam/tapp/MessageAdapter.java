@@ -75,10 +75,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
+                //check for receiver image
                 if (dataSnapshot.hasChild("image"))
                 {
                     String receiverImage = dataSnapshot.child("image").getValue().toString();
-                    Picasso.get().load(receiverImage).placeholder(R.drawable.profile_image).into(messageViewHolder.receiverProfileImage);
+                    Picasso.get().load(receiverImage).placeholder(R.drawable.profile_image)
+                            .into(messageViewHolder.receiverProfileImage);
                 }
             }
 
@@ -88,8 +90,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             }
         });
 
+        //if the message is text
         if (fromMessageType.equals("text"))
         {
+            //set all textviews to invisible
             messageViewHolder.receiverMessageText.setVisibility(View.INVISIBLE);
             messageViewHolder.receiverProfileImage.setVisibility(View.INVISIBLE);
             messageViewHolder.senderMessageText.setVisibility(View.INVISIBLE);
@@ -100,13 +104,16 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             //if its the sender
             if (fromUserID.equals(messageSenderId))
             {
+                //make the sender textviews visible
                 messageViewHolder.senderMessageText.setVisibility(View.VISIBLE);
                 messageViewHolder.senderMessageText.setBackgroundResource(R.drawable.sender_messages_layout);
                 messageViewHolder.senderMessageText.setTextColor(Color.BLACK);
                 messageViewHolder.senderMessageText.setText(messages.getMessage());
 
+                //if the emotion is in database
                 if (messages.getEmotion()!=null)
                 {
+                    //display emotion
                     messageViewHolder.senderEmotion.setVisibility(View.VISIBLE);
                     messageViewHolder.senderEmotion.setTextColor(Color.RED);
                     messageViewHolder.senderEmotion.setText(messages.getEmotion());
@@ -114,6 +121,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             }
             else
             {
+                //receiver sent a message so receiving textviews and image holder are made visible
                 messageViewHolder.receiverMessageText.setVisibility(View.VISIBLE);
                 messageViewHolder.receiverProfileImage.setVisibility(View.VISIBLE);
 
@@ -121,6 +129,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                 messageViewHolder.receiverMessageText.setText(messages.getMessage());
                 messageViewHolder.receiverMessageText.setTextColor(Color.BLACK);
 
+                //if the emotion is in database
                 if (messages.getEmotion()!=null)
                 {
                     messageViewHolder.receiverEmotion.setVisibility(View.VISIBLE);

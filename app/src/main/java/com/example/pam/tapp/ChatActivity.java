@@ -138,7 +138,6 @@ public class ChatActivity extends AppCompatActivity implements PictureCapturingL
     private RecyclerView userMessagesList;
     private int letterCount;
 
-
     private String emotionText = "";
     private String emotion = "";
     private String emotionFace = "";
@@ -718,60 +717,7 @@ public class ChatActivity extends AppCompatActivity implements PictureCapturingL
         transferUtility = new TransferUtility(s3, getApplicationContext());
     }
 
-    public void UploadPhoto(File file) {
-        // KEY and SECRET are gotten when we create an IAM user above
-        //BasicAWSCredentials credentials = new BasicAWSCredentials(KEY, SECRET);
-       // AmazonS3Client s3Client = new AmazonS3Client(credentials);
-        Log.d("debug ag", "" + file);
-        TransferUtility transferUtility =
-                TransferUtility.builder()
-                        .context(getApplicationContext())
-                        .awsConfiguration(AWSMobileClient.getInstance().getConfiguration())
-                        //.s3Client(s3Client)
-                        .build();
-        Log.d("debug ag", "12");
-// "jsaS3" will be the folder that contains the file
-        TransferObserver uploadObserver =
-                transferUtility.upload("image-rekog101/", file);
-        s3:
-///20171126_170418.jpg
-        Log.d("debug ag", "345");
-        uploadObserver.setTransferListener(new TransferListener() {
-
-            @Override
-            public void onStateChanged(int id, TransferState state) {
-                if (TransferState.COMPLETED == state) {
-                    if (TransferState.COMPLETED == state) {
-                        Toast.makeText(getApplicationContext(), "Upload Completed!", Toast.LENGTH_SHORT).show();
-
-                        file.delete();
-                    } else if (TransferState.FAILED == state) {
-                        file.delete();
-                    }
-                }
-            }
-
-            @Override
-            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
-                float percentDonef = ((float) bytesCurrent / (float) bytesTotal) * 100;
-                int percentDone = (int) percentDonef;
-            }
-
-            @Override
-            public void onError(int id, Exception ex) {
-                // Handle errors
-
-                showToast("ERROR IN bucket transfer");
-            }
-
-        });
-
-// If your upload does not trigger the onStateChanged method inside your
-// TransferListener, you can directly check the transfer state as shown here.
-        if (TransferState.COMPLETED == uploadObserver.getState()) {
-            // Handle a completed upload.
-        }
-    }
+    
 }
 
 

@@ -51,7 +51,8 @@ public class PhoneLoginActivity extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(phoneNumber)){        //if the phone number is empty
                     //inform user
-                    Toast.makeText(PhoneLoginActivity.this,"Please enter your phone number first", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PhoneLoginActivity.this,"Please enter your phone number first",
+                            Toast.LENGTH_SHORT).show();
 
                 } else {        //if not
                     //loading bar
@@ -80,7 +81,8 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 SendVerificationCode.setVisibility(View.INVISIBLE);
                 InputPhoneNumber.setVisibility(View.INVISIBLE);
 
-                String verificationCode = InputVerificationCode.getText().toString();       ///get verification code from input field
+                ///get verification code from input field
+                String verificationCode = InputVerificationCode.getText().toString();
 
                 if (TextUtils.isEmpty(verificationCode)){   //check if its empty
                     Toast.makeText(PhoneLoginActivity.this,"pls write first", Toast.LENGTH_SHORT).show();
@@ -103,11 +105,12 @@ public class PhoneLoginActivity extends AppCompatActivity {
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                 signInWithPhoneAuthCredential(phoneAuthCredential);
             }
-
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 loadingBar.dismiss();
-                Toast.makeText(PhoneLoginActivity.this,"invalid phone number, pls enter correct phone number with country code", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PhoneLoginActivity
+                        .this,"invalid phone number, pls enter correct phone number with country code",
+                        Toast.LENGTH_SHORT).show();
                 //set the phone number input field and ver button to invisible
                 SendVerificationCode.setVisibility(View.VISIBLE);
                 InputPhoneNumber.setVisibility(View.VISIBLE);
@@ -115,17 +118,14 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 VerifyButton.setVisibility(View.INVISIBLE);
                 InputVerificationCode.setVisibility(View.INVISIBLE);
             }
-
             @Override
             public void onCodeSent(String verificationId,
                                    PhoneAuthProvider.ForceResendingToken token) {
-
                 loadingBar.dismiss();
                 // Save verification ID and resending token so we can use them later
                 mVerificationId = verificationId;
                 mResendToken = token;
                 Toast.makeText(PhoneLoginActivity.this,"Code Sent!", Toast.LENGTH_SHORT).show();
-
                 //set the phone number input field and ver button to invisible
                 SendVerificationCode.setVisibility(View.INVISIBLE);
                 InputPhoneNumber.setVisibility(View.INVISIBLE);
@@ -144,12 +144,15 @@ public class PhoneLoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success
                             loadingBar.dismiss();
-                            Toast.makeText(PhoneLoginActivity.this,"Congratulation, you are logged in successfully!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PhoneLoginActivity.this,
+                                    "Congratulation, you are logged in successfully!",
+                                    Toast.LENGTH_SHORT).show();
                             SendUserToMainActivity();
                         } else {
                             // Sign in failed
                             String message = task.getException().toString();
-                            Toast.makeText(PhoneLoginActivity.this,"Error: "+message, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PhoneLoginActivity.this,
+                                    "Error: "+message, Toast.LENGTH_SHORT).show();
 
                         }
                     }

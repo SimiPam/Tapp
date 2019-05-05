@@ -132,12 +132,16 @@ public class SettingsActivity extends AppCompatActivity {
                                             {
                                                 if (task.isSuccessful())
                                                 {
-                                                    Toast.makeText(SettingsActivity.this, "Profile image stored to firebase database successfully.", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(SettingsActivity.this,
+                                                            "Profile image stored to firebase database successfully.",
+                                                            Toast.LENGTH_SHORT).show();
                                                     loadingBar.dismiss();
                                                 } else
                                                 {
                                                     String message = task.getException().getMessage();
-                                                    Toast.makeText(SettingsActivity.this, "Error Occurred..." + message, Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(SettingsActivity.this,
+                                                            "Error Occurred..." + message,
+                                                            Toast.LENGTH_SHORT).show();
                                                     loadingBar.dismiss();
                                                 }
                                             }
@@ -168,7 +172,6 @@ public class SettingsActivity extends AppCompatActivity {
     private void UpdateSetting() {
         String setUserName = userName.getText().toString();
         String setUserStaus = userStatus.getText().toString();
-
         //check if the email is empty
         if (TextUtils.isEmpty(setUserName))
         {
@@ -186,18 +189,21 @@ public class SettingsActivity extends AppCompatActivity {
             profileMap.put("uid", currentUserID);
             profileMap.put("name",setUserName);
             profileMap.put("status", setUserStaus);
-            RootRef.child("Users").child(currentUserID).updateChildren(profileMap) //set the user name and status and user id to the database under the users table
+            //set the user name and status and user id to the database under the users table
+            RootRef.child("Users").child(currentUserID).updateChildren(profileMap)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful())
                             {
                                 SendUserToMainActivity();
-                                Toast.makeText(SettingsActivity.this, "updae successful!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SettingsActivity.this,
+                                        "update successful!", Toast.LENGTH_SHORT).show();
                             } else {
                                 {  //if unsuccessful
                                     String message = task.getException().toString(); //get the exception to a string
-                                    Toast.makeText(SettingsActivity.this, " Error: " + message, Toast.LENGTH_SHORT).show(); //display the exception
+                                    Toast.makeText(SettingsActivity.this,
+                                            " Error: " + message, Toast.LENGTH_SHORT).show(); //display the exception
                                 }
                             }
                         }
@@ -209,7 +215,8 @@ public class SettingsActivity extends AppCompatActivity {
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if ((dataSnapshot.exists())&&(dataSnapshot.hasChild("name")&& (dataSnapshot.hasChild("image")))){ //if user id exists in the database, ie if the user has created an account and has created his profile
+                        //if user id exists in the database, ie if the user has created an account and has created his profile
+                        if ((dataSnapshot.exists())&&(dataSnapshot.hasChild("name")&& (dataSnapshot.hasChild("image")))){
                             //retrieve the user name nd status and profile picture for the current user
                             String retrieveUserName = dataSnapshot.child("name").getValue().toString();
                             String retrieveUserStatus = dataSnapshot.child("status").getValue().toString();
@@ -219,7 +226,9 @@ public class SettingsActivity extends AppCompatActivity {
                             userStatus.setText(retrieveUserStatus);
                             Picasso.get().load(retrieveProfileImage).into(userProfileImage);
 
-                        } else if ((dataSnapshot.exists())&&(dataSnapshot.hasChild("name"))) { ////retrieve the user name nd status for the current user
+                        }
+                        ////retrieve the user name nd status for the current user
+                        else if ((dataSnapshot.exists())&&(dataSnapshot.hasChild("name"))) {
                             String retrieveUserName = dataSnapshot.child("name").getValue().toString();
                             String retrieveUserStatus = dataSnapshot.child("status").getValue().toString();
 
